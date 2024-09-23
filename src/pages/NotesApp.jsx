@@ -2,7 +2,7 @@ import React from "react";
 import Headers from "../components/Headers";
 import NoteAddBody from "../components/NoteAdd/NoteAddBody";
 import NoteListBody from "../components/NoteList/NoteListBody";
-import { getInitialData } from "../utils";
+import { getInitialData, showFormattedDate } from "../utils";
 
 class NotesApp extends React.Component {
 
@@ -14,10 +14,11 @@ class NotesApp extends React.Component {
     notes: getInitialData()
   }
   
+  this.handleAddNotes = this.handleAddNotes.bind(this)
   }
 
 
-handleAddNotes({title, content}){
+handleAddNotes({title, body}){
   this.setState((prevState) => {
     return {
       notes: [
@@ -25,7 +26,9 @@ handleAddNotes({title, content}){
         {
           id: +new Date(),
           title,
-          content
+          body,
+          createdAt: showFormattedDate(),
+          archive: false
         }
       ]
     }
@@ -37,8 +40,8 @@ handleAddNotes({title, content}){
       <div className="w-full min-h-auto ">
         <Headers/>
         <div className="w-full min-h-auto lg:w-3/4 lg:mx-auto">
-        <NoteAddBody  />
-        <NoteListBody notes={this.state.notes} />
+        <NoteAddBody  addNotes={this.handleAddNotes}/>
+        <NoteListBody notes={this.state.notes}  />
         </div>
       </div>
     )

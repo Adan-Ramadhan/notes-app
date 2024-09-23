@@ -6,11 +6,12 @@ class NoteInput extends React.Component {
 
     this.state = {
       title: "",
-      content: "",
+      body: "",
     };
 
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
-    this.handleChangeContent = this.handleChangeContent.bind(this);
+    this.handleChangeContent = this.handleChangeBody.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChangeTitle(event) {
@@ -21,21 +22,25 @@ class NoteInput extends React.Component {
     });
   }
 
-  handleChangeContent(event){
+  handleChangeBody(event){
     this.setState(() => {
       return {
-        content: event.target.value,
+        body: event.target.value,
       };
     });
   }
 
+  handleSubmit(event){
+    event.preventDefault()
+    this.props.addNotes(this.state)
+  }
   
 
   render() {
     return (
-      <form className="w-full  flex flex-col gap-y-3">
+      <form onSubmit={this.handleSubmit} className="w-full  flex flex-col gap-y-3">
         <input type="text" placeholder="Ini adalah judul..." value={this.state.title} onChange={this.handleChangeTitle} id="title" className="border rounded-md px-2 py-1" />
-        <textarea placeholder="Tuliskan catatanmu disini..." value={this.state.content} onChange={this.handleChangeContent} id="content" className="w-full h-36 border rounded-md px-2 py-1" />
+        <textarea placeholder="Tuliskan catatanmu disini..." value={this.state.body} onChange={this.handleChangeBody} id="content" className="w-full h-36 border rounded-md px-2 py-1" />
         <button type="submit" className="bg-primary hover:bg-second text-white font-semibold py-2 rounded-md">
           Buat
         </button>
