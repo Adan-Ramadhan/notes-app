@@ -1,6 +1,6 @@
 import React from "react";
 import Headers from "../components/Headers";
-import NoteAddBody from "../components/NoteAdd/NoteAddBody";
+import NoteInputBody from "../components/NoteInput/NoteInputBody";
 import NoteListBody from "../components/NoteList/NoteListBody";
 import { getInitialData, showFormattedDate } from "../utils";
 
@@ -40,7 +40,7 @@ handleAddNotes({title, body}){
       <div className="w-full min-h-auto ">
         <Headers/>
         <div className="w-full min-h-auto lg:w-3/4 lg:mx-auto">
-        <NoteAddBody  addNotes={this.handleAddNotes}/>
+        <NoteInputBody  addNotes={this.handleAddNotes}/>
         <NoteListBody notes={this.state.notes}  />
         </div>
       </div>
