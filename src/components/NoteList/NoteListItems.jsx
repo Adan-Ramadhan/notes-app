@@ -1,6 +1,6 @@
 import Button from "../Button";
 
-const PrivateNoteListItems = ({notes}) => {
+const PrivateNoteListItems = ({notes, onDelete}) => {
   return(
     <div className="w-full min-h-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-5 p-3">
       {notes.map((note) => (
@@ -10,7 +10,7 @@ const PrivateNoteListItems = ({notes}) => {
             <p className="font-normal text-base text-slate-400 mb-2">{note.createdAt}</p>
             <p className="font-normal text-base mb-2">{note.body}</p>
             </div>
-            <Button/>
+            <Button onDelete={onDelete} noteId={note.id} />
         </div>
       ))}
     </div>
