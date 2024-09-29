@@ -1,7 +1,6 @@
 import Button from "../Button";
 
 const NoteArchiveListItems = ({ archive }) => {
-  console.log(archive);
   return (
     <>
       {archive && archive.length > 0 ? (

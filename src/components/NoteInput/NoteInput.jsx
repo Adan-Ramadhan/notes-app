@@ -46,7 +46,7 @@ class NoteInput extends React.Component {
     return (
       <form onSubmit={this.handleSubmit} className="w-full  flex flex-col gap-y-3">
         <div className="w-full flex justify-end">
-          <p>Sisa Karakter: {this.state.count}</p>
+          <p className={`${this.state.count <= 0 ? "text-red-700" : "text-slate-400"}`}>Sisa Karakter: {this.state.count}</p>
         </div>
         <input type="text" placeholder="Ini adalah judul..." value={this.state.title} onChange={this.handleChangeTitle} id="title" className="border rounded-md px-2 py-1" />
         <textarea placeholder="Tuliskan catatanmu disini..." value={this.state.body} onChange={this.handleChangeBody} id="content" className="w-full h-36 border rounded-md px-2 py-1" />

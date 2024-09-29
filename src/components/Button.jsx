@@ -1,7 +1,5 @@
 const Button = ({ onDelete, toArchive, noteId, archiveId }) => {
 
-  console.log(archiveId)
-  console.log(noteId)
 
   return (
     <div className="w-full flex">
