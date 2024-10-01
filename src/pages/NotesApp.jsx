@@ -11,13 +11,12 @@ class NotesApp extends React.Component {
 
     this.state = {
       notes: getInitialData(),
-      archiveNotes: [],
       searchNotes: "",
     };
 
     this.handleAddNotes = this.handleAddNotes.bind(this);
     this.deleteNotes = this.deleteNotes.bind(this);
-    this.addToArchive = this.addToArchive.bind(this);
+    this.handleChangeStatus = this.handleChangeStatus.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
@@ -60,17 +59,17 @@ class NotesApp extends React.Component {
     }
   }
 
-  // Bang ga tau gimana cara biar balik lagi dari archive ke catatan bang, sedihnya:(
-  // button delete juga gabisa di akses di body archive bang padahal dah dicoba ngambil pake id archivenya tapi ndak bisa, tak tau lah bang:(
+  handleChangeStatus(id) {
+    const notes = this.state.notes.map((note) => {
+      if(note.id === id){
+        return{
+          ...note, archived: true
+        }
+      }
+      return note
+    })
 
-  addToArchive(id) {
-    const archive = this.state.notes.find((note) => note.id === id);
-    this.setState((prevState) => {
-      return {
-        archiveNotes: [...prevState.archiveNotes, archive],
-      };
-    });
-    this.deleteNotes(id);
+    this.setState({notes})
   }
 
   deleteNotes(id) {
@@ -84,8 +83,8 @@ class NotesApp extends React.Component {
         <Headers handleSearchChange={this.handleSearchChange} searchValue={this.state.searchNotes} />
         <div className="w-full min-h-auto lg:w-3/4 lg:mx-auto">
           <NoteInputBody addNotes={this.handleAddNotes} />
-          <NoteListBody notes={this.state.notes} onDelete={this.deleteNotes} toArchive={this.addToArchive} />
-          <NoteArchiveBody archive={this.state.archiveNotes} />
+          <NoteListBody notes={this.state.notes.filter((note) => !note.archived)} onDelete={this.deleteNotes} toArchive={this.handleChangeStatus} />
+          <NoteArchiveBody archive={this.state.notes.filter((note) => note.archived)} />
         </div>
       </div>
     );
